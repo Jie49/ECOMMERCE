@@ -1,11 +1,10 @@
-<?php
-
-    require_once("Includes\header.php");
-
+<?php 
+session_start();
+    require_once("includes\header.php")
 ?>
 
     <!-- Navbar -->
-    <?php require_once("Includes\\navbar.php"); ?>
+    <?php require_once("includes\\navbar.php"); ?>
 
     <!-- Shopping Cart -->
     <div class="container mt-5">

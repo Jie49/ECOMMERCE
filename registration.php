@@ -1,11 +1,23 @@
-<?php
 
-    require_once("Includes\header.php");
+<?php 
 
+    session_start();
+    require_once("includes\header.php");
+
+    if(isset($_SESSION["error"])){
+        $messageErr = $_SESSION["error"];
+        unset($_SESSION["error"]);
+    }
+
+    if(isset($_SESSION["success"])){
+        $messageSucc = $_SESSION["success"];
+        unset($_SESSION["success"]);
+    }
 ?>
-<?php require_once("Includes\\navbar.php"); ?>
 
-  
+    <!-- Navbar -->
+    <?php require_once("includes\\navbar.php"); ?>
+
     <!-- Registration Form -->
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -14,32 +26,29 @@
                     <div class="card-header bg-primary text-white text-center">
                         <h4>Create Your Account</h4>
                     </div>
-
                     <div class="card-body">
-                    <?php 
-                    if(isset($_GET["success"])){?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong><?php echo $_GET["success"]; ?></strong> You should check in on some of those fields below.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    
-                    <?php }?>
+                        <!-- message response -->
+                        <?php if(isset($messageSucc)){ ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong><?php echo $messageSucc; ?></strong> 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php } ?>    
 
-                    <?php
-                    if(isset($_GET["danger"])){?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong><?php echo $_GET["danger"]; ?> </strong> You should check in on some of those fields below.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <?php }?>
-                        <form action="authRegister.php" method="POST">
+                        <?php if(isset($messageErr)){ ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><?php echo $messageErr; ?></strong> 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php } ?>    
+                        <form action="app/auth/Register.php" method="POST">
                             <div class="mb-3">
                                 <label for="fullName" class="form-label">Full Name</label>
                                 <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
                             </div>
                             <div class="mb-3">
-                                <label for="username" class="form-label">Email <i class="fa fa-address-card-o" aria-hidden="true"></i></label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+                                <label for="username" class="form-label">Email Address</label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your email" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>

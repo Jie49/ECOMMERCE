@@ -1,9 +1,11 @@
-<?php
-
-    require_once("Includes\header.php");
-
+<?php 
+    session_start();
+    require_once("includes\header.php");
 ?>
-<?php require_once("Includes\\navbar.php"); ?>
+    
+    <!-- Navbar -->
+    <?php require_once("includes\\navbar.php"); ?>
+
     <!-- Hero Section -->
     <div class="container-fluid bg-primary text-white text-center py-5">
         <h1 class="display-4">Welcome to MyShop!</h1>
